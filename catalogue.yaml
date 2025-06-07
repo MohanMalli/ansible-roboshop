@@ -70,7 +70,7 @@
 
     - name: check products loaded or not
       ansible.builtin.command: mongosh --host mongodb.malli.site  --eval  'db.getMongo().getDBNames().indexOf("catalogue")'   
-      regrister:catalogue_output:
+      regrister: catalogue_output:
 
     - name: print catalogue catalogue_output
       ansible.builtin.debug:

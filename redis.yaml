@@ -29,7 +29,7 @@
      ansible.biltin.service:
       name: redis
       state: started
-      enable: yes
+      enable: yes 
 
 
 

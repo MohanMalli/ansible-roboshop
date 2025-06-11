@@ -20,9 +20,9 @@
      ansible.builtin.service:
        name: nginx
        state: started
-       enable: yes
+       enabled: yes
 
-   - name: remove the default content in html
+   - name: remove  html directory
      ansible.builtin.file:
        path: /usr/share/nginx/html
        state: absent
@@ -53,13 +53,13 @@
        src: nginx.conf
        dest: /etc/nginx/nginx.conf
 
-   - name: restart nginx server
+   - name: restart nginx 
      ansible.builtin.service:
         name: nginx
         state: restarted 
       
-   - name: Ensure the service is enabled and started
-     ansible.builtin.systemd:
-      name: frontend.malli.site
-      enabled: yes
-      state: started
+  #  - name: Ensure the service is enabled and started
+  #    ansible.builtin.systemd:
+  #     name: frontend.malli.site
+  #     enabled: yes
+  #     state: started

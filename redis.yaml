@@ -26,10 +26,10 @@
       line: protected-mode no
 
    - name: start and enable service
-     ansible.biltin.service:
+     ansible.builtin.service:
       name: redis
       state: started
-      enable: yes 
+      enabled: yes 
 
 
 

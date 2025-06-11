@@ -16,24 +16,24 @@
       name: nginx
       state: present
 
-    - name: start and enable nginx
-      ansible.builtin.service:
+   - name: start and enable nginx
+     ansible.builtin.service:
        name: nginx
        state: present
        enable: yes
 
-    - name: remove the default content in html
-      ansible.builtin.file:
+   - name: remove the default content in html
+     ansible.builtin.file:
        path: /usr/share/nginx/html
        state: absent
 
-    - name: create html directory
-      ansible.builtin.file:
+   - name: create html directory
+     ansible.builtin.file:
        path: /usr/share/nginx/html 
        state: directory
 
-    - name: downlaod frontend code
-      ansible.builtin.get_url:
+   - name: downlaod frontend code
+     ansible.builtin.get_url:
        url: https://roboshop-artifacts.s3.amazonaws.com/frontend-v3.zip
        dest: /tmp/frontend.zip
 

@@ -25,7 +25,7 @@
       path: /app
       state: directory
 
-   - name: download the application code
+   - name: download the  code
      ansible.builtin.get_url:
       url: https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip
       dest: /tmp/cart.zip
@@ -33,7 +33,7 @@
 # this module thinks file exist on ansible control server, needs to extract on to remote machine
 # remote_src: yes means files already exist in user server      
 
-   - name: extract the code
+   - name: extract cart code
      ansible.builtin.unarchive:
         src: /tmp/cart.zip
         dest: /app

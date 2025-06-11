@@ -16,8 +16,9 @@
    - name: create a system user
      ansible.builtin.user:
       name: roboshop
-      shell: /sbin/nolonin   
-      system: /app
+      shell: /sbin/nologin   
+      system: true
+      home: /app
 
    - name: create app directory
      ansible.builtin.file:

@@ -6,7 +6,7 @@
      ansible.builtin.dnf:
       name: "{{ item }}"
       state: present
-      loop:
+     loop:
        - maven
        - mysql
 
@@ -85,8 +85,6 @@
       tags:
        - import
       ansible.builtin.service:
-
-
-
-
+        name: shipping
+        state: restarted
 

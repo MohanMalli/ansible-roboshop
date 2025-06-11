@@ -19,7 +19,7 @@
    - name: start and enable nginx
      ansible.builtin.service:
        name: nginx
-       state: present
+       state: started
        enable: yes
 
    - name: remove the default content in html

@@ -65,7 +65,7 @@
      ansible.builtin.service:
        name: shipping
        state: started
-       enable: yes
+       enabled: yes
 
    - name: import data
      tags: 

@@ -2,9 +2,6 @@
   become: yes
   hosts: frontend
   tasks:
-   - name: list the module nginx
-     ansible.builtin.command: dnf module list nginx
-
    - name: disable default nginx
      ansible.builtin.command: dnf module disable nginx -y
 

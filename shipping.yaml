@@ -31,60 +31,60 @@
       system: true
       home: /app
 
-    - name: download shipping code
-      ansible.builtin.get_url:
+   - name: download shipping code
+     ansible.builtin.get_url:
       url: https://roboshop-artifacts.s3.amazonaws.com/shipping-v3.zip
       dest: /tmp/shipping.zip
 
-    - name: extract shipping code 
-      ansible.builtin.unarchive:
+   - name: extract shipping code 
+     ansible.builtin.unarchive:
       src: /tmp/shipping.zip
       dest: /app
       remote_src: yes
 
-    - name: install maven dependencies
-      ansible.builtin.command: mvn clean package 
-      args: 
+   - name: install maven dependencies
+     ansible.builtin.command: mvn clean package 
+     args: 
         chdir: /app   
 
-    - name: rename the shipping component
-      ansible.builtin.command:  mv target/shipping-1.0.jar shipping.jar
-      args:
+   - name: rename the shipping component
+     ansible.builtin.command:  mv target/shipping-1.0.jar shipping.jar
+     args:
         chdir: /app
 
-    - name: copy shipping service to  system directory    
-      ansible.builtin.copy:
+   - name: copy shipping service to  system directory    
+     ansible.builtin.copy:
        src: shipping.service
        dest: /etc/systemd/system/shipping.service
 
-    - name: systemctl daemon reload
-      ansible.builtin.systemd_service:
+   - name: systemctl daemon reload
+     ansible.builtin.systemd_service:
        daemon_reload: true
 
-    - name: start and enable shipping
-      ansible.builtin.service:
+   - name: start and enable shipping
+     ansible.builtin.service:
        name: shipping
        state: started
        enable: yes
 
-    - name: import data
-      args: 
+   - name: import data
+     args: 
       - import
-      community.mysql.mysql_db:
+     community.mysql.mysql_db:
         name: all 
         login_user: ec2-user
         login_password: RoboShop@1
         login_host: mysql.malli.site
         target: "{{ item }}"
-      loop:
+     loop:
           - /app/db/schema.sql 
           - /app/db/app-user.sql
           - /app/db/master-data.sql
 
-    - name: restart the shipping
-      tags:
+   - name: restart the shipping
+     tags:
        - import
-      ansible.builtin.service:
+     ansible.builtin.service:
         name: shipping
         state: restarted
 

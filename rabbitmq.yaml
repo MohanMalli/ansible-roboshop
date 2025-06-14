@@ -1,4 +1,4 @@
-- name: configure rabbitmq component
+- name: setup rabbitmq component
   become: yes
   hosts: rabbitmq
   tasks: 
@@ -14,11 +14,11 @@
 
    - name: start and enable rabbitmq 
      ansible.builtin.service:
-      name: rabbitmq
+      name: rabbitmq-server
       state: started
       enabled: yes
 
-   - name: create user in rabbitmq
+   - name: create rabbitmq user
      community.rabbitmq.rabbitmq_user:
        user: roboshop
        password: roboshop123

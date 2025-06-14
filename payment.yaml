@@ -6,52 +6,52 @@
      ansible.builtin.dnf:
       name: "{{ item }}"
       state: present
-    - loop:
-       python3
-       gcc
-       python3-devel 
+   - loop:
+      python3
+      gcc
+      python3-devel 
 
-    - name: create app directory
-      ansible.builtin.file:
+   - name: create app directory
+     ansible.builtin.file:
        path: /app
        state: directory 
 
-    - name: create a user
-      ansible.builtin.user:
+   - name: create a user
+     ansible.builtin.user:
        shell: /sbin/nologin
        home: /app
        system: yes
 
-    - name: download payment code
-      ansible.buitin.get_url:
+   - name: download payment code
+     ansible.buitin.get_url:
        url: https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip
        dest: /tmp/payment.zip   
 
-    - name: extract the code
-      ansible.builtin.unarchive:
+   - name: extract the code
+     ansible.builtin.unarchive:
        src: /tmp/payment.zip 
        dest: /app
 
-    - name: install dependencies
-      ansible.builtin.pip:
+   - name: install dependencies
+     ansible.builtin.pip:
       requirements: requirements.txt
       name: pip3
       state: present
 
-    - name: copy payment service to system directory
-      ansible.builtin.copy:
+   - name: copy payment service to system directory
+     ansible.builtin.copy:
       src: payment.service
       dest: /etc/systemd/system/payment.service
 
-    - name: systemctl daemon reload
-      ansible.builtin.systemd_service:
+   - name: systemctl daemon reload
+     ansible.builtin.systemd_service:
       daemon_reload: yes
 
-    - name: start and enable payment
-      ansible.builtin.service:
+   - name: start and enable payment
+     ansible.builtin.service:
        name: payment
        state: started
-       enable: yes
+       enabled: yes
 
 
 

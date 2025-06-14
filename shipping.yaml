@@ -4,19 +4,19 @@
   tasks:
    - name: install maven
      ansible.builtin.dnf:
-      name: "{{ item }}"
+      name: " {{ item }} "
       state: present
      loop:
-       - maven
-       - mysql
+      - maven
+      - mysql
 
    - name: install PyMySQL and cryptography
      ansible.builtin.pip:
-      name: "{{ item }}"
+      name: " {{ item }} "
       executable: pip3.9
      loop:
-       - PyMySQL
-       - cryptography
+      - PyMySQL
+      - cryptography
     
 
    - name: create app directory
@@ -68,23 +68,24 @@
        enable: yes
 
    - name: import data
-     args: 
-      - import
-     community.mysql.mysql_db:
-        name: all 
-        login_user: ec2-user
-        login_password: RoboShop@1
-        login_host: mysql.malli.site
-        target: "{{ item }}"
-     loop:
-          - /app/db/schema.sql 
-          - /app/db/app-user.sql
-          - /app/db/master-data.sql
-
-   - name: restart the shipping
-     tags:
+     tags: 
        - import
+     community.mysql.mysql_db:
+       name: all 
+       login_user: root
+       login_password: RoboShop@1
+       login_host: mysql.malli.site
+       state: import
+       target: " {{ item }} "
+     loop:
+      - /app/db/schema.sql 
+      - /app/db/app-user.sql
+      - /app/db/master-data.sql
+
+   - name: restart  shipping
+     tags:
+     - import
      ansible.builtin.service:
-        name: shipping
-        state: restarted
+       name: shipping
+       state: restarted
 

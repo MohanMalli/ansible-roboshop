@@ -37,8 +37,9 @@
    - name: install dependencies
      ansible.builtin.pip:
       requirements: requirements.txt
-      name: pip3
-      state: present
+      executable: pip3.9
+     args:
+       chdir: /app
 
    - name: copy payment service to system directory
      ansible.builtin.copy:
@@ -47,7 +48,7 @@
 
    - name: systemctl daemon reload
      ansible.builtin.systemd_service:
-      daemon_reload: yes
+      daemon_reload: true
 
    - name: start and enable payment
      ansible.builtin.service:

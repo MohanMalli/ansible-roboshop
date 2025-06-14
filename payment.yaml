@@ -16,8 +16,9 @@
        path: /app
        state: directory 
 
-   - name: create a user
+   - name: create a roboshop user
      ansible.builtin.user:
+       name: roboshop
        shell: /sbin/nologin
        home: /app
        system: yes

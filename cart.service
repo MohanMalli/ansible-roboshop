@@ -4,6 +4,7 @@ Description=Cart Service
 [Service]
 User=roboshop
 Environment=REDIS_HOST=redis.malli.sbs
+Environment=REDIS_PORT=6379
 Environment=CATALOGUE_HOST=catalogue.malli.sbs
 Environment=CATALOGUE_PORT=8080
 ExecStart=/bin/node /app/server.js

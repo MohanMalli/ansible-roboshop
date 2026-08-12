@@ -89,7 +89,7 @@
       name: all
       login_user: root
       login_password: RoboShop@1
-      login_host: mysql.malli.site
+      login_host: mysql.malli.sbs
       state: import
       target: "{{ item }}"
      loop:
@@ -101,6 +101,6 @@
      tags:
      - import
      ansible.builtin.service:
-       name: shipping
-       state: restarted
+      name: shipping
+      state: restarted
 

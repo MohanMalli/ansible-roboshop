@@ -4,8 +4,8 @@ Description=Shipping Service
 [Service]
 User=roboshop
 // highlight-start
-Environment=CART_ENDPOINT=cart.malli.site:8080
-Environment=DB_HOST=mysql.malli.site
+Environment=CART_ENDPOINT=cart.malli.sbs:8080
+Environment=DB_HOST=mysql.malli.sbs
 // highlight-end
 ExecStart=/bin/java -jar /app/shipping.jar
 SyslogIdentifier=shipping
